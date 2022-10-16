@@ -11,13 +11,13 @@ class Customer:
         self.__generate_customer_id()
 
     def __generate_customer_id(self):
-        self.customer_id = calendar.timegm(time.gmtime())
+        self.customer_id = str(calendar.timegm(time.gmtime()))
 
     def to_dict(self):
         return {
+            "customer_id": self.customer_id,
             "name": self.name,
             "national_id": self.national_id,
             "phone": self.phone,
-            "email": self.email,
-            "customer_id": self.customer_id
+            "email": self.email
         }

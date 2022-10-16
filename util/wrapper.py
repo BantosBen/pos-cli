@@ -1,10 +1,10 @@
 from texttable import Texttable
-import colors as col
+from . import colors as col
 
 
 def printDataTable(table_data):
     table = Texttable()
-    table.set_cols_dtype(["t" for _ in range(len(table_data[0][0]) + 1)])
+    table.set_cols_dtype(["t" for _ in range(len(table_data[0]))])
     table.add_rows(table_data)
     print(table.draw())
 
