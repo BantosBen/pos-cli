@@ -1,5 +1,6 @@
 import pyfiglet
 from customer import controller as customer_controller
+from product import controller as product_controller
 
 
 def main():
@@ -11,7 +12,7 @@ def main():
         if user_choice == "1":
             customer_controller.CustomerController().displayMenu()
         elif user_choice == "2":
-            pass
+            product_controller.ProductController().displayMenu()
         elif user_choice == "3":
             pass
         elif user_choice == "0":

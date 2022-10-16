@@ -4,7 +4,7 @@ from os.path import exists
 
 class FileUtil:
     def __init__(self, _table_name):
-        self.table_name = 'data/' + _table_name+'.json'
+        self.table_name = 'data/' + _table_name + '.json'
 
     def read_data(self):
         if exists(self.table_name):
@@ -12,7 +12,7 @@ class FileUtil:
                 data = json.load(table)
             return data
         else:
-            return dict()
+            return list()
 
     def write_data(self, data):
         with open(self.table_name, 'w') as table:
