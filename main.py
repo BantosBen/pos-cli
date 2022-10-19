@@ -1,6 +1,7 @@
 import pyfiglet
 from customer import controller as customer_controller
 from product import controller as product_controller
+from purchase import controller as purchase_controller
 
 
 def main():
@@ -14,7 +15,7 @@ def main():
         elif user_choice == "2":
             product_controller.ProductController().displayMenu()
         elif user_choice == "3":
-            pass
+            purchase_controller.ProductController().displayMenu()
         elif user_choice == "0":
             print("app shutting down...")
             break

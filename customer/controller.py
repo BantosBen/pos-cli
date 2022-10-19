@@ -17,10 +17,15 @@ class CustomerController:
             if user_choice == "1":
                 _name, _national_id, _phone, _email = view.add_customer_view()
                 if _name is not None:
-                    self.save_new_customer(customer.Customer(_name, _national_id, _phone, _email))
+                    if wrapper.isValidEmail(_email):
+                        if wrapper.isValidPhone(_phone):
+                            self.save_new_customer(customer.Customer(_name, _national_id, _phone, _email))
+                        else:
+                            wrapper.print_error_message('\nRegistration Failed! Invalid Phone Number')
+                    else:
+                        wrapper.print_error_message('\nRegistration Failed! Invalid Email')
                 else:
                     wrapper.print_error_message('\nSubmission aborted!')
-
             elif user_choice == "2":
                 customer_id, field, new_value = view.update_customer_view()
                 if 0 < field <= 4:
@@ -56,12 +61,11 @@ class CustomerController:
         self.file_util.write_data(self.data)
         wrapper.print_success_message("\nSaved successfully")
 
-    def check_id(self, _customer_id):
+    def customer_exists(self, _customer_id):
         for record in self.data:
             if record["customer_id"] == _customer_id:
-                return self.data.update()
-
-        return None
+                return True
+        return False
 
     def update_customer(self, customer_id, field, new_value):
         for i in range(len(self.data)):
@@ -76,9 +80,11 @@ class CustomerController:
         table_data = list()
         for i in range(len(self.data)):
             table_data.append(self.data[i])
-
         wrapper.print_title("\nAll customers")
-        self.__prepare_table_data(table_data)
+        if len(table_data) > 0:
+            self.__prepare_table_data(table_data)
+        else:
+            wrapper.print_title("\n\tNo customer records yet")
 
     def search_customer(self, field, keyword):
         table_data = list()
@@ -86,7 +92,10 @@ class CustomerController:
             if keyword.lower() in str(self.data[i][field]).lower():
                 table_data.append(self.data[i])
         wrapper.print_title("\nSearch result for {}:'{}'".format(field, keyword))
-        self.__prepare_table_data(table_data)
+        if len(table_data) > 0:
+            self.__prepare_table_data(table_data)
+        else:
+            wrapper.print_title("\n\tNo customer found")
 
     def delete_customer(self, customer_id):
         for i in range(len(self.data)):

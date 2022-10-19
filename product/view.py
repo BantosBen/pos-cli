@@ -21,7 +21,7 @@ def add_product_view():
 def update_product_view():
     product_id = str(input("Enter Product ID: "))
     field = int(
-        input("Which field do you wish to update:\n\t1) Name\n\t2) Price\n\t3) Quantity"))
+        input("Which field do you wish to update:\n\t1) Name\n\t2) Price\n\t3) Quantity\n\t>> "))
     new_value = str(input("Enter the new value: "))
 
     confirm = str(input("\nDo you wish to submit this form (y/n): ")).lower()
@@ -33,7 +33,7 @@ def update_product_view():
 
 def search_product_view():
     field = int(
-        input("Select search field:\n\t1) Name\n\t2) Product ID"))
+        input("Select search field:\n\t1) Name\n\t2) Product ID\n\t>> "))
     keyword = str(input("Enter the search keyword: "))
 
     confirm = str(input("\nDo you wish to submit this form (y/n): ")).lower()

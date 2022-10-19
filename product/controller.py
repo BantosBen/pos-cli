@@ -25,7 +25,8 @@ class ProductController:
                 product_id, field, new_value = view.update_product_view()
                 if 0 < field <= 3:
                     if product_id is not None:
-                        self.__update_product(product_id, fields[field - 1], new_value)
+                        if self.__update_product(product_id, fields[field - 1], new_value):
+                            wrapper.print_success_message("\nUpdate successful!")
                     else:
                         wrapper.print_error_message('\nSubmission aborted!')
                 else:
@@ -57,7 +58,13 @@ class ProductController:
         self.file_util.write_data(self.data)
         wrapper.print_success_message("\nSaved successfully")
 
-    def check_id(self, _product_id):
+    def product_info(self, _product_id):
+        for record in self.data:
+            if record["product_id"] == _product_id:
+                return record['price'], record['name'], record['quantity']
+        return None, None, None
+
+    def product_exists(self, _product_id):
         for record in self.data:
             if record["product_id"] == _product_id:
                 return True
@@ -68,9 +75,9 @@ class ProductController:
             if self.data[i]["product_id"] == product_id:
                 self.data[i][field] = new_value
                 self.file_util.write_data(self.data)
-                wrapper.print_success_message("\nUpdate successful!")
-                return
+                return True
         wrapper.print_error_message("\nUpdate failed. Product ID not found")
+        return False
 
     def __display_all_products(self):
         table_data = list()
@@ -103,3 +110,9 @@ class ProductController:
         for datum in _raw_data:
             table_data.append(list(datum.values()))
         wrapper.printDataTable(table_data)
+
+    def updateQuantity(self, raw_order_products):
+        for product_id, quantity in raw_order_products.items():
+            _, _, db_quantity = self.product_info(product_id)
+            new_quantity = int(db_quantity) - int(quantity)
+            self.__update_product(product_id, 'quantity', new_quantity)
