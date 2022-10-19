@@ -1,1 +1,9 @@
-[{"customer_id": "1665912452", "name": "Angatia Benson", "national_id": "37058859", "phone": "0748355080", "email": "angatiabenson1@gmail.com"}]
+[
+  {
+    "customer_id": "1665912452",
+    "name": "Angatia Benson",
+    "national_id": "37058859",
+    "phone": "0748355080",
+    "email": "angatiabenson1@gmail.com"
+  }
+]

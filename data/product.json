@@ -1,8 +1,1 @@
-[
-  {
-    "product_id": "1665912770",
-    "name": "Wireless Mouse",
-    "price": "800",
-    "quantity": "19"
-  }
-]
+[{"product_id": "1665912770", "name": "Wireless Mouse", "price": "800", "quantity": 7}, {"product_id": "1665912771", "name": "Router", "price": "1500", "quantity": 14}, {"product_id": "1665912772", "name": "Laptop charger", "price": "1000", "quantity": 4}]

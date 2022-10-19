@@ -22,7 +22,7 @@ def add_customer_view():
 def update_customer_view():
     customer_id = str(input("Enter Customer ID: "))
     field = int(
-        input("Which field do you wish to update:\n\t1) Name\n\t2) Email\n\t3) Phone\n\t4) National ID\n\t"))
+        input("Which field do you wish to update:\n\t1) Name\n\t2) Email\n\t3) Phone\n\t4) National ID\n\t>> "))
     new_value = str(input("Enter the new value: "))
 
     confirm = str(input("\nDo you wish to submit this form (y/n): ")).lower()
@@ -34,7 +34,7 @@ def update_customer_view():
 
 def search_customer_view():
     field = int(
-        input("Select search field:\n\t1) Name\n\t2) Email\n\t3) Phone\n\t4) National ID\n\t"))
+        input("Select search field:\n\t1) Name\n\t2) Email\n\t3) Phone\n\t4) National ID\n\t>> "))
     keyword = str(input("Enter the search keyword: "))
 
     confirm = str(input("\nDo you wish to submit this form (y/n): ")).lower()
