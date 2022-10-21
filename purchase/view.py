@@ -2,6 +2,7 @@ from tabulate import tabulate
 
 
 def display_product_sub_menu():
+    """Displays the purchase menu"""
     print("\n--------------------------\n\tPURCHASE MENU\n--------------------------")
     print(
         "1) Make new purchase\n2) View customer purchase history\n3) View order details\n0) Home")
@@ -9,24 +10,29 @@ def display_product_sub_menu():
 
 
 def customer_authentication_view():
+    """Requests for customer ID"""
     return str(input("Enter customer ID: "))
 
 
 def product_details_view():
+    """Displays the add to cart view"""
     product_id = str(input("Enter product ID: "))
     quantity = str(input("Enter product quantity: "))
     return product_id, quantity
 
 
 def confirmation_view(_message="\nDo you wish to continue shopping (y/n): "):
+    """Requests for confirmation"""
     return str(input(_message)).lower()
 
 
 def ask_order_id_view():
+    """Requests for order ID"""
     return str(input("Enter order ID: "))
 
 
 def print_receipt(order_info):
+    """Prepares and displays the receipt"""
     print("\n\t\tPOS-CLI RECEIPT")
     print("Order ID:", order_info.order_id)
     print("Date:", order_info.order_date)
