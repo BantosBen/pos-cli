@@ -1,4 +1,9 @@
 import re
+from decouple import config
+
+
+def getPassword():
+    print(config('PASSWORD'))
 
 
 def isValidPhone(phone):
@@ -8,6 +13,4 @@ def isValidPhone(phone):
         return False
 
 
-while True:
-    phone = input("Enter Phone: ")
-    print(isValidPhone(phone))
+getPassword()

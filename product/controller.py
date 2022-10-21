@@ -6,11 +6,13 @@ import util.wrapper as wrapper
 
 class ProductController:
     def __init__(self):
+        """Instantiate product controller object"""
         self.file_util = util.FileUtil(_table_name="product")
         self.data = self.file_util.read_data()
         self.table_headers = ["Product ID", "Name", "Price", "Quantity"]
 
     def displayMenu(self):
+        """Displays the product submenu and rerouting the user request to perform required transactions"""
         while True:
             user_choice = view.display_product_sub_menu()
             if user_choice == "1":
@@ -54,23 +56,27 @@ class ProductController:
                 wrapper.print_error_message('\nFailed to process your request. Invalid choice.')
 
     def __save_new_product(self, model):
+        """Adds new product into the storage files"""
         self.data.append(model.to_dict())
         self.file_util.write_data(self.data)
         wrapper.print_success_message("\nSaved successfully")
 
     def product_info(self, _product_id):
+        """Retrieves details of a specific product"""
         for record in self.data:
             if record["product_id"] == _product_id:
                 return record['price'], record['name'], record['quantity']
         return None, None, None
 
     def product_exists(self, _product_id):
+        """Checks if the product exists in the storage"""
         for record in self.data:
             if record["product_id"] == _product_id:
                 return True
         return False
 
     def __update_product(self, product_id, field, new_value):
+        """Updates the records of the product"""
         for i in range(len(self.data)):
             if self.data[i]["product_id"] == product_id:
                 self.data[i][field] = new_value
@@ -80,6 +86,7 @@ class ProductController:
         return False
 
     def __display_all_products(self):
+        """Displays all the product"""
         table_data = list()
         for i in range(len(self.data)):
             table_data.append(self.data[i])
@@ -88,6 +95,7 @@ class ProductController:
         self.__prepare_table_data(table_data)
 
     def __search_product(self, field, keyword):
+        """Finds a product"""
         table_data = list()
         for i in range(len(self.data)):
             if keyword.lower() in str(self.data[i][field]).lower():
@@ -96,6 +104,7 @@ class ProductController:
         self.__prepare_table_data(table_data)
 
     def __delete_product(self, product_id):
+        """Removes a product from the storage files"""
         for i in range(len(self.data)):
             if self.data[i]["product_id"] == product_id:
                 self.data.pop(i)
@@ -105,6 +114,7 @@ class ProductController:
         wrapper.print_error_message("\nDelete failed. Customer ID not found")
 
     def __prepare_table_data(self, _raw_data):
+        """Prepares to display the products in a table"""
         table_data = list()
         table_data.append(self.table_headers)
         for datum in _raw_data:
@@ -112,6 +122,7 @@ class ProductController:
         wrapper.printDataTable(table_data)
 
     def updateQuantity(self, raw_order_products):
+        """Updates the number or products"""
         for product_id, quantity in raw_order_products.items():
             _, _, db_quantity = self.product_info(product_id)
             new_quantity = int(db_quantity) - int(quantity)

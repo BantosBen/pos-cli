@@ -5,10 +5,12 @@ from . import view
 from . import order_product as op
 from . import order as order
 import util.wrapper as wrapper
+from mailer import sender
 
 
 class ProductController:
     def __init__(self):
+        """Creates the purchase controller object"""
         self.customer_id = None
         self.file_util = util.FileUtil(_table_name="order")
         self.data = self.file_util.read_data()
@@ -18,6 +20,7 @@ class ProductController:
         self.order_products = list()
 
     def displayMenu(self):
+        """Displays the purchase submenu and rerouting the user request to perform required transactions"""
         while True:
             user_choice = view.display_product_sub_menu()
             if user_choice == "1":
@@ -73,36 +76,8 @@ class ProductController:
             else:
                 wrapper.print_error_message('\nFailed to process your request. Invalid choice.')
 
-    def __save_new_product(self, model):
-        self.data.append(model.to_dict())
-        self.file_util.write_data(self.data)
-        wrapper.print_success_message("\nSaved successfully")
-
-    def check_id(self, _product_id):
-        for record in self.data:
-            if record["product_id"] == _product_id:
-                return True
-        return False
-
-    def __update_product(self, product_id, field, new_value):
-        for i in range(len(self.data)):
-            if self.data[i]["product_id"] == product_id:
-                self.data[i][field] = new_value
-                self.file_util.write_data(self.data)
-                wrapper.print_success_message("\nUpdate successful!")
-                return
-        wrapper.print_error_message("\nUpdate failed. Product ID not found")
-
-    def __delete_product(self, product_id):
-        for i in range(len(self.data)):
-            if self.data[i]["product_id"] == product_id:
-                self.data.pop(i)
-                self.file_util.write_data(self.data)
-                wrapper.print_success_message("\nDelete successful!")
-                return
-        wrapper.print_error_message("\nDelete failed. Customer ID not found")
-
     def prepare_order(self, raw_order_products):
+        """Prepares the data of the order"""
         for product_id, quantity in raw_order_products.items():
             price, name, _ = self.product.product_info(product_id)
             amount = float(price) * int(quantity)
@@ -115,6 +90,7 @@ class ProductController:
             self.place_order()
 
     def place_order(self):
+        """Saves th order and later retrieves the customer email address and emails the receipt"""
         items = list()
         order_amount = 0
         for order_product in self.order_products:
@@ -126,8 +102,13 @@ class ProductController:
         self.file_util.write_data(self.data)
         wrapper.print_success_message("\nOrder placed successfully")
         view.print_receipt(order_info)
+        wrapper.print_title("\nsending email...")
+        customer_email = self.customer.customer_email(self.customer_id)
+        sender.send(order_info, customer_email)
+        wrapper.print_success_message("\nEmail sent successfully")
 
     def prepare_customer_order_history(self):
+        """Prints the order history of the specific customer"""
         table_data = list()
         table_data.append(['Order ID', 'Amount', 'Date'])
         for order_info in self.data:
@@ -141,6 +122,7 @@ class ProductController:
             wrapper.print_title("\n\t\tNo orders found for the customer ID")
 
     def prepare_order_details(self, order_id):
+        """Displays an organized table of the order details"""
         table_data = list()
         table_data.append(['Items', 'Qty', 'Total'])
         for order_info in self.data:

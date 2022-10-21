@@ -1,4 +1,5 @@
 def display_customer_sub_menu():
+    """Displays the main customer menu"""
     print("\n--------------------------\n\tCUSTOMER MENU\n--------------------------")
     print(
         "1) Add Customer\n2) Update Customer\n3) Delete Customer\n4) Display all customers\n5) Search customers\n0) "
@@ -7,6 +8,7 @@ def display_customer_sub_menu():
 
 
 def add_customer_view():
+    """Displays the form to collect new customer's data"""
     name = str(input("Enter Customer Name: "))
     national_id = str(input("Enter Customer National Id: "))
     phone = str(input("Enter Customer Phone: "))
@@ -20,6 +22,7 @@ def add_customer_view():
 
 
 def update_customer_view():
+    """Displays the customer update sub menu"""
     customer_id = str(input("Enter Customer ID: "))
     field = int(
         input("Which field do you wish to update:\n\t1) Name\n\t2) Email\n\t3) Phone\n\t4) National ID\n\t>> "))
@@ -33,6 +36,7 @@ def update_customer_view():
 
 
 def search_customer_view():
+    """Displays the customer search sub menu"""
     field = int(
         input("Select search field:\n\t1) Name\n\t2) Email\n\t3) Phone\n\t4) National ID\n\t>> "))
     keyword = str(input("Enter the search keyword: "))
@@ -45,6 +49,7 @@ def search_customer_view():
 
 
 def delete_customer_view():
+    """Displays the customer delete form"""
     customer_id = str(input("Enter Customer ID: "))
 
     confirm = str(input("\nDo you wish to submit this form (y/n): ")).lower()

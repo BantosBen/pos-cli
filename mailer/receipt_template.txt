@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JENGA SCHOOL POS-CLI</title>
+    <style type="text/css">
+        #invoice-POS{
+            box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+            padding:4mm;
+            margin: 0 auto;
+            width: 80%%;
+            background: #FFF;
+        }
+
+        h1{
+            font-size: 1.5em;
+            color: #222;
+        }
+
+        h3{
+            font-weight: 300;
+            line-height: 2em;
+        }
+
+        p{
+            color: #666;
+            line-height: 1.2em;
+        }
+
+        #top, #mid,#bot{
+            border-bottom: 1px solid #EEE;
+        }
+
+        #top{min-height: 100px;}
+        #mid{min-height: 80px;}
+        #bot{ min-height: 50px;}
+
+        #top .logo{
+            height: 60px;
+            width: 60px;
+            background: url(https://jengaschool.com/wp-content/uploads/2020/08/JENGA-School-Head.png) no-repeat;
+            background-size: 60px 60px;
+        }
+
+        .info{
+            display: block;
+            margin-left: 0;
+        }
+        .title{
+            float: right;
+        }
+        .title p{text-align: right;}
+        table{
+            width: 100%%;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .tabletitle{
+            background: #5B86C5;
+            color: white;
+        }
+        .service{border-bottom: 1px solid #EEE;}
+        .item{width: 40%%;}
+
+        #legalcopy{
+            margin-top: 5mm;
+        }
+    </style>
+
+</head>
+<body>
+
+  <div id="invoice-POS">
+
+    <center id="top">
+      <div class="logo"></div>
+      <div class="info">
+        <h2>JENGA SCHOOL POS-CLI</h2>
+      </div>
+    </center>
+
+    <div id="mid">
+      <div class="info">
+        <center>
+            <p>
+                Address :   PQ27+QW8, Riara Rd, Nairobi<br>
+                Email   :   admin@jengaschool.com<br>
+                Phone   :   +254708140168<br>
+            </p>
+            <h2>Receipt</h2>
+        </center>
+        <p> <strong>
+            %s
+            </strong>
+        </p>
+      </div>
+    </div>
+
+    <div id="bot">
+
+					<div id="table">
+						<table>
+							<tr class="tabletitle">
+								<td class="item"><h5>Item</h5></td>
+								<td class="Hours"><h5>Qty</h5></td>
+								<td class="Rate"><h5>Sub Total (Kes)</h5></td>
+							</tr>
+							%s
+							<tr class="tabletitle">
+								<td></td>
+								<td class="Rate"><h5>Total Amount (Kes)</h5></td>
+								<td class="payment"><h5>%s</h5></td>
+							</tr>
+
+						</table>
+					</div>
+
+					<div id="legalcopy">
+                        <center>
+                            <p class="legal"><strong>Thank you for being a great customer</strong>.<br> Visit our branches for great offers and products at affordable prices. Incase of any inqury contact our <a href="https://jengaschool.com/">Support Team</a></p>
+                        </center>
+					</div>
+                    <br>
+                    <br>
+                    <center>
+                        <p>Copyright © 2022 Jenga School POS-CLI, All rights reserved.<br>Click here to <a href="https://jengaschool.com/software-engineering-professional-accelerator/">unsubscribe.</a></p>
+                    </center>
+
+				</div>
+  </div>
+
+</body>
+</html>
