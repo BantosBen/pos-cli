@@ -33,19 +33,23 @@ class ProductController:
                         product_id, quantity = view.product_details_view()
                         _, _, db_quantity = self.product.product_info(product_id)
                         if db_quantity is not None:
-                            if int(db_quantity) >= int(quantity):
-                                if int(quantity) > 0:
-                                    if product_id not in raw_order_products:
-                                        raw_order_products[product_id] = quantity
+                            if wrapper.safe_str_to_number(quantity):
+                                if int(db_quantity) >= int(quantity):
+                                    if int(quantity) > 0:
+                                        if product_id not in raw_order_products:
+                                            raw_order_products[product_id] = quantity
+                                        else:
+                                            raw_order_products[product_id] = int(raw_order_products[product_id]) + int(
+                                                quantity)
+                                        wrapper.print_success_message("Added to cart successfully")
                                     else:
-                                        raw_order_products[product_id] = int(raw_order_products[product_id]) + int(
-                                            quantity)
-                                    wrapper.print_success_message("Added to cart successfully")
+                                        wrapper.print_error_message("Failed to add to cart. Invalid quantity")
                                 else:
-                                    wrapper.print_error_message("Failed to add to cart. Invalid quantity")
+                                    wrapper.print_error_message(
+                                        "Failed to add to cart. There are only {} items left".format(db_quantity))
                             else:
-                                wrapper.print_error_message(
-                                    "Failed to add to cart. There are only {} items left".format(db_quantity))
+                                wrapper.print_error_message("\nFailed to add to cart! Invalid quantity")
+
                         else:
                             wrapper.print_error_message("Failed to add to cart. No such product ID found")
 

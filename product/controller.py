@@ -18,7 +18,13 @@ class ProductController:
             if user_choice == "1":
                 name, price, quantity = view.add_product_view()
                 if name is not None:
-                    self.__save_new_product(product.Product(name, price, quantity))
+                    if wrapper.safe_str_to_number(price) is not None:
+                        if wrapper.safe_str_to_number(quantity) is not None:
+                            self.__save_new_product(product.Product(name, price, quantity))
+                        else:
+                            wrapper.print_error_message("\nFailed! Invalid quantity")
+                    else:
+                        wrapper.print_error_message("\nFailed! Invalid price")
                 else:
                     wrapper.print_error_message('\nSubmission aborted!')
 
