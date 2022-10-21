@@ -17,11 +17,11 @@ class CustomerController:
         while True:
             user_choice = view.display_customer_sub_menu()
             if user_choice == "1":
-                _name, _national_id, _phone, _email = view.add_customer_view()
-                if _name is not None:
-                    if wrapper.isValidEmail(_email):
-                        if wrapper.isValidPhone(_phone):
-                            self.save_new_customer(customer.Customer(_name, _national_id, _phone, _email))
+                name, national_id, phone, email = view.add_customer_view()
+                if name is not None:
+                    if wrapper.isValidEmail(email):
+                        if wrapper.isValidPhone(phone):
+                            self.save_new_customer(customer.Customer(name, national_id, phone, email))
                         else:
                             wrapper.print_error_message('\nRegistration Failed! Invalid Phone Number')
                     else:
