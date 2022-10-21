@@ -1,16 +1,1 @@
-[
-  {
-    "customer_id": "1665912452",
-    "name": "Angatia Benson",
-    "national_id": "37058859",
-    "phone": "0748355080",
-    "email": "bensonetia@gmail.com"
-  },
-  {
-    "customer_id": "1666174487",
-    "name": "Albert Njoroge Kahira",
-    "national_id": "12345678",
-    "phone": "0748355080",
-    "email": "albert@jengaschool.com"
-  }
-]
+[{"customer_id": "1665912452", "name": "Angatia Benson", "national_id": "37058859", "phone": "0748355080", "email": "bensonetia@gmail.com"}, {"customer_id": "1666174487", "name": "Albert Njoroge Kahira", "national_id": "12345678", "phone": "0748355080", "email": "albert@jengaschool.com"}, {"customer_id": "1666347626", "name": "ty", "national_id": "78", "phone": "0712345678", "email": "gh@gh.com"}]

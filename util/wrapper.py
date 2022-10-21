@@ -25,6 +25,14 @@ def printDataTable(table_data):
     print(table.draw())
 
 
+def safe_str_to_number(value):
+    try:
+        int_value = int(value)
+        return int_value
+    except ValueError:
+        return None
+
+
 def print_error_message(_message):
     print(
         col.Colors.FAIL + _message + col.Colors.END_C)

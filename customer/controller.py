@@ -21,7 +21,10 @@ class CustomerController:
                 if name is not None:
                     if wrapper.isValidEmail(email):
                         if wrapper.isValidPhone(phone):
-                            self.save_new_customer(customer.Customer(name, national_id, phone, email))
+                            if wrapper.safe_str_to_number(national_id) is not None:
+                                self.save_new_customer(customer.Customer(name, national_id, phone, email))
+                            else:
+                                wrapper.print_error_message("\nRegistration Failed! Invalid national ID")
                         else:
                             wrapper.print_error_message('\nRegistration Failed! Invalid Phone Number')
                     else:
